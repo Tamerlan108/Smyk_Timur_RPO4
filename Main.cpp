@@ -188,6 +188,5 @@ for (int i = 1; i < 7; ++i)
 
 std::cout << "Максимальное число: " << maxNumber3 << "\n";
 
-
 return 0;
 }
