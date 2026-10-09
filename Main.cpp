@@ -131,108 +131,62 @@ int main()
 */
 
 //Задание 1
-const int size = 10;
-int arr[size]{};
-
-for (int i = 0; i < size; i++)
+int number1;
+std::cout << "Введите шестизначное число: ";
+std::cin >> number1;
+if (number1 < 100000 || number1 > 999999)
 {
-    arr[i] = rand() % 11 + 1;
+    std::cout << "Ошибка: число не шестизначное";
 }
-
-int minVal = arr[0];
-int maxVal = arr[0];
-
-for (int i = 1; i < size; i++)
+else
 {
-    if (arr[i] < minVal)
+    int sumFirst = (number1 / 100000) % 10 + (number1 / 10000) % 10 + (number1 / 1000) % 10;
+    int sumSecond = (number1 / 100) % 10 + (number1 / 10) % 10 + number1 % 10;
+    if (sumFirst == sumSecond)
     {
-        minVal = arr[i];
+        std::cout << "Число: Счастливое";
     }
-    if (arr[i] > maxVal)
+    else
     {
-        maxVal = arr[i];
+        std::cout << "Число: Не счастливое";
     }
 }
+//Задание 2 
+int Number2;
+std::cout << "Введите четырехзначное число: ";
+std::cin >> Number2;
 
-std::cout << "Минимальный элемент: " << minVal << "\n";
-std::cout << "Максимальный элемент: " << maxVal << "\n";
-
-//Задание 2
-const int size = 10;
-int arr[size]{};
-int minRange, maxRange, threshold;
-
-std::cout << "Введите нижнюю границу диапазона: ";
-std::cin >> minRange;
-std::cout << "Введите верхнюю границу диапазона: ";
-std::cin >> maxRange;
-std::cout << "Введите пороговое значение: ";
-std::cin >> threshold;
-
-for (int i = 0; i < size; ++i)
+if (Number2 < 1000 || Number2 > 9999)
 {
-    arr[i] = minRange + rand() % (maxRange - minRange + 1);
+    std::cout << "Ошибка: число не четырехзначное";
 }
-long long sum = 0;
-for (int i = 0; i < size; ++i)
+else
 {
-    if (arr[i] < threshold)
-    {
-        sum += arr[i];
-    }
+    int firstDigit = Number2 / 1000;
+    int secondDigit = (Number2 / 100) % 10;
+    int thirdDigit = (Number2 / 10) % 10;
+    int fourthDigit = Number2 % 10;
+
+    int resultNumber = secondDigit * 1000 + firstDigit * 100 + fourthDigit * 10 + thirdDigit;
+    std::cout << resultNumber;
 }
-
-std::cout << "Сумма элементов, меньших " << threshold << ": " << sum << "\n";
-
 //Задание 3
-const int months = 12;
-double profit[months];
+int number3;
+int maxNumber3;
 
-std::cout << "Введите прибыль фирмы за каждый месяц года: \n";
+std::cout << "Введите 7 целых чисел (через пробел): ";
+std::cin >> maxNumber3;
 
-for (int i = 0; i < months; i++)
+for (int i = 1; i < 7; ++i)
 {
-    std::cout << "Месяц " << (i + 1) << ": ";
-    std::cin >> profit[i];
-}
-
-int start, end;
-std::cout << "\nВведите диапазон поиска (начальный и конечный месяц через пробел, например 3 6): ";
-std::cin >> start >> end;
-
-if (start < 1 || start > 12 || end < 1 || end > 12 || start > end)
-{
-   std::cout << "Ошибка: некорректный диапазон!";
-    return 1;
-}
-
-double minVal = profit[start - 1];
-double maxVal = profit[start - 1];
-
-int minMonthIndex = start - 1;
-int maxMonthIndex = start - 1;
-
-for (int i = start; i < end; i++)
-{
-    if (profit[i] < minVal)
+    std::cin >> number3;
+    if (number3 > maxNumber3)
     {
-        minVal = profit[i];
-        minMonthIndex = i;
-    }
-
-
-    if (profit[i] > maxVal)
-    {
-        maxVal = profit[i];
-        maxMonthIndex = i;
+        maxNumber3 = number3;
     }
 }
 
-std::cout << "Диапазон поиска: с " << start << " по " << end << " месяц \n";
-
-std::cout << "Максимальная прибыль: " << maxVal << " (Месяц " << (maxMonthIndex + 1) << ")\n";
-
-std::cout << "Минимальная прибыль: " << minVal << " (Месяц " << (minMonthIndex + 1) << ")";
+std::cout << "Максимальное число: " << maxNumber3 << "\n";
 
 return 0;
 }
