@@ -129,8 +129,7 @@ int main()
             std::cout << "\nВыбран Выход\n";
         }
 */
-
-//Задание 1
+/*//Задание 1
 int number1;
 std::cout << "Введите шестизначное число: ";
 std::cin >> number1;
@@ -186,8 +185,110 @@ for (int i = 1; i < 7; ++i)
     }
 }
 
-std::cout << "Максимальное число: " << maxNumber3 << "\n";
+std::cout << "Максимальное число: " << maxNumber3 << "\n";*/
+//Задание 1
+const int size = 10;
+int arr[size]{};
 
+for (int i = 0; i < size; i++)
+{
+    arr[i] = rand() % 11 + 1;
+}
+
+int minVal = arr[0];
+int maxVal = arr[0];
+
+for (int i = 1; i < size; i++)
+{
+    if (arr[i] < minVal)
+    {
+        minVal = arr[i];
+    }
+    if (arr[i] > maxVal)
+    {
+        maxVal = arr[i];
+    }
+}
+
+std::cout << "Минимальный элемент: " << minVal << "\n";
+std::cout << "Максимальный элемент: " << maxVal << "\n";
+
+//Задание 2
+const int size = 10;
+int arr[size]{};
+int minRange, maxRange, threshold;
+
+std::cout << "Введите нижнюю границу диапазона: ";
+std::cin >> minRange;
+std::cout << "Введите верхнюю границу диапазона: ";
+std::cin >> maxRange;
+std::cout << "Введите пороговое значение: ";
+std::cin >> threshold;
+
+for (int i = 0; i < size; ++i)
+{
+    arr[i] = minRange + rand() % (maxRange - minRange + 1);
+}
+int sum = 0;
+for (int i = 0; i < size; ++i)
+{
+    if (arr[i] < threshold)
+    {
+        sum += arr[i];
+    }
+}
+
+std::cout << "Сумма элементов, меньших " << threshold << ": " << sum << "\n";
+
+//Задание 3
+const int months = 12;
+double profit[months];
+
+std::cout << "Введите прибыль фирмы за каждый месяц года: \n";
+
+for (int i = 0; i < months; i++)
+{
+    std::cout << "Месяц " << (i + 1) << ": ";
+    std::cin >> profit[i];
+}
+
+int start, end;
+std::cout << "\nВведите диапазон поиска (начальный и конечный месяц через пробел, например 3 6): ";
+std::cin >> start >> end;
+
+if (start < 1 || start > 12 || end < 1 || end > 12 || start > end)
+{
+    std::cout << "Ошибка: некорректный диапазон!";
+    return 1;
+}
+
+double minVal = profit[start - 1];
+double maxVal = profit[start - 1];
+
+int minMonth = start - 1;
+int maxMonth = start - 1;
+
+for (int i = start; i < end; i++)
+{
+    if (profit[i] < minVal)
+    {
+        minVal = profit[i];
+        minMonth = i;
+    }
+
+
+    if (profit[i] > maxVal)
+    {
+        maxVal = profit[i];
+        maxMonth = i;
+    }
+}
+
+std::cout << "Диапазон поиска: с " << start << " по " << end << " месяц \n";
+
+std::cout << "Максимальная прибыль: " << maxVal << " (Месяц " << (maxMonth + 1) << ")\n";
+
+std::cout << "Минимальная прибыль: " << minVal << " (Месяц " << (minMonth + 1) << ")";
 
 return 0;
 }
