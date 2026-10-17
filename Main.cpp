@@ -1,10 +1,138 @@
 #include <iostream>
 #include <Windows.h>
+//1 Задание
+bool LeapYear(int year)
+{
+    if (year % 400 == 0)
+    {
+        return true;
+    }
+    if (year % 100 == 0)
+    {
+        return false;
+    }
+    if (year % 4 == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
+int daysInMonth(int month, int year)
+{
+    int days = 31;
+
+    if (month == 2)
+    {
+        if (LeapYear(year))
+        {
+            days = 29;
+        }
+        else
+        {
+            days = 28;
+        }
+    }
+    if (month == 4 || month == 6 || month == 9 || month == 11)
+    {
+        return 30;
+    }
+    return 31;
+}
+
+int daysBetweenDates(int d1, int m1, int y1, int d2, int m2, int y2)
+{
+    int totalDays1 = 0;
+    for (int y = 0; y < y1; ++y)
+    {
+        if (LeapYear(y))
+        {
+            totalDays1 += 366;
+        }
+        else
+        {
+            totalDays1 += 365;
+        }
+    }
+    for (int m = 1; m < m1; ++m)
+    {
+        totalDays1 += daysInMonth(m, y1);
+    }
+    totalDays1 += d1;
+
+    int totalDays2 = 0;
+    for (int y = 0; y < y2; ++y)
+    {
+        if (LeapYear(y))
+        {
+            totalDays2 += 366;
+        }
+        else
+        {
+            totalDays2 += 365;
+        }
+    }
+    for (int m = 1; m < m2; ++m)
+    {
+        totalDays2 += daysInMonth(m, y2);
+    }
+    totalDays2 += d2;
+
+    int diff = totalDays1 - totalDays2;
+    if (diff < 0)
+    {
+        diff = -diff;
+    }
+
+    return diff;
+}
+
+//Задание 2
+double averageArray(int arr[], int size)
+{
+    if (size <= 0)
+    {
+        return 0.0;
+    }
+    double sum = 0;
+    for (int i = 0; i < size; ++i)
+    {
+        sum += arr[i];
+    }
+    return sum / size;
+}
+
+//Задание 3
+void countElements(int arr[], int size, int& posCount, int& negCount, int& zeroCount)
+{
+    posCount = 0;
+    negCount = 0;
+    zeroCount = 0;
+
+    for (int i = 0; i < size; ++i)
+    {
+        if (arr[i] > 0)
+        {
+            posCount++;
+        }
+        else if (arr[i] < 0)
+        {
+            negCount++;
+        }
+        else
+        {
+            zeroCount++;
+        }
+    }
+}
+
+
 int main()
 {
 	SetConsoleCP(CP_UTF8);
 	SetConsoleOutputCP(CP_UTF8);
-/*	std::cout << "Hello world, Timur Smyk";	*/
+/*	std::cout << "Hello world, Timur Smyk";
+*/
 /*	std::cout << "\n \t\t-----------------------------";
 	std::cout << "\n \t\t\t< KY Farit! >";
 	std::cout << "\n \t\t-----------------------------";
@@ -186,6 +314,7 @@ for (int i = 1; i < 7; ++i)
 }
 
 std::cout << "Максимальное число: " << maxNumber3 << "\n";*/
+/*
 //Задание 1
 const int size = 10;
 int arr[size]{};
@@ -288,7 +417,40 @@ std::cout << "Диапазон поиска: с " << start << " по " << end <<
 
 std::cout << "Максимальная прибыль: " << maxVal << " (Месяц " << (maxMonth + 1) << ")\n";
 
-std::cout << "Минимальная прибыль: " << minVal << " (Месяц " << (minMonth + 1) << ")";
+std::cout << "Минимальная прибыль: " << minVal << " (Месяц " << (minMonth + 1) << ")";*/
+// Задание 1
+int day1 = 0, month1 = 0, year1 = 0;
+int day2 = 0, month2 = 0, year2 = 0;
+
+std::cout << "Введите первую дату (день месяц год): ";
+std::cin >> day1 >> month1 >> year1;
+
+std::cout << "Введите вторую дату (день месяц год): ";
+std::cin >> day2 >> month2 >> year2;
+
+int result = daysBetweenDates(day1, month1, year1, day2, month2, year2);
+
+std::cout << "Разница между датами составляет: " << result << " дней\n";
+
+//Задание 2
+const int Size2 = 5;
+int myArray[Size2] = { 5, 42, 15, 67, 52 };
+
+double result = averageArray(myArray, Size2);
+
+std::cout << "Среднее арифметическое: " << result;
+
+//Задание 3
+const int Size3 = 7;
+int myArray[Size3] = { 67, -42, 0, 52, 0, -12, 7 };
+
+int positives, negatives, zeros;
+
+countElements(myArray, Size3, positives, negatives, zeros);
+
+std::cout << "Положительных элементов: " << positives << "\n";
+std::cout << "Отрицательных элементов: " << negatives << "\n";
+std::cout << "Нулевых элементов: " << zeros << "\n";
 
 return 0;
 }
